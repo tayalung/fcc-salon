@@ -16,21 +16,29 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE ONLY public.appointments DROP CONSTRAINT appointments_service_id_fkey;
-ALTER TABLE ONLY public.appointments DROP CONSTRAINT appointments_customer_id_fkey;
-ALTER TABLE ONLY public.services DROP CONSTRAINT services_pkey;
-ALTER TABLE ONLY public.customers DROP CONSTRAINT customers_pkey;
-ALTER TABLE ONLY public.customers DROP CONSTRAINT customers_phone_key;
-ALTER TABLE ONLY public.appointments DROP CONSTRAINT appointments_pkey;
-ALTER TABLE public.services ALTER COLUMN service_id DROP DEFAULT;
-ALTER TABLE public.customers ALTER COLUMN customer_id DROP DEFAULT;
-ALTER TABLE public.appointments ALTER COLUMN appointment_id DROP DEFAULT;
-DROP SEQUENCE public.services_service_id_seq;
-DROP TABLE public.services;
-DROP SEQUENCE public.customers_customer_id_seq;
-DROP TABLE public.customers;
-DROP SEQUENCE public.appointments_appointment_id_seq;
-DROP TABLE public.appointments;
+DROP DATABASE salon;
+--
+-- Name: salon; Type: DATABASE; Schema: -; Owner: freecodecamp
+--
+
+CREATE DATABASE salon WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
+
+
+ALTER DATABASE salon OWNER TO freecodecamp;
+
+\connect salon
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -165,29 +173,23 @@ ALTER TABLE ONLY public.services ALTER COLUMN service_id SET DEFAULT nextval('pu
 -- Data for Name: appointments; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.appointments (appointment_id, customer_id, service_id, "time") FROM stdin;
-\.
 
 
 --
 -- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.customers (customer_id, name, phone) FROM stdin;
-\.
 
 
 --
 -- Data for Name: services; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.services (service_id, name) FROM stdin;
-1	cut
-2	color
-3	perm
-4	style
-5	trim
-\.
+INSERT INTO public.services VALUES (1, 'cut');
+INSERT INTO public.services VALUES (2, 'color');
+INSERT INTO public.services VALUES (3, 'perm');
+INSERT INTO public.services VALUES (4, 'style');
+INSERT INTO public.services VALUES (5, 'trim');
 
 
 --
